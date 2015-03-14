@@ -1,0 +1,16 @@
+{
+  "name": "lats-web",
+  "description": "web component for lats project",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dom-mel/LatS-web",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.2.x",
+    "angular-route": "1.2.x",
+    "angular-loader": "1.2.x",
+    "angular-mocks": "~1.2.x",
+    "bootstrap": "~3.3.x",
+    "flot": "flot/flot"
+  }
+}

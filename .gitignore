@@ -1,0 +1,14 @@
+
+!.gitkeep
+
+node_modules/
+
+app/bower_components/
+app/css/*
+
+tmp
+.DS_Store
+*~
+.idea
+*.iml
+*.swp
