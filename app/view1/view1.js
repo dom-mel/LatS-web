@@ -14,7 +14,7 @@ angular.module('LatS.view1', ['ngRoute', 'angular-flot'])
         $scope.dataset = [
             {
                 data: [
-                    [now, 13]
+                    [now, 0]
                 ]
             }
         ];
@@ -29,8 +29,13 @@ angular.module('LatS.view1', ['ngRoute', 'angular-flot'])
             }
         };
 
+        var x = 0;
         $interval(function() {
-            $scope.dataset[0].data.push([(new Date()).getTime(), parseInt( Math.random() * 100) ]);
+            x++;
+            if (x > 360) {
+                x = 0;
+            }
+            $scope.dataset[0].data.push([(new Date()).getTime(), ( Math.sin(x)) ]);
             var now = (new Date()).getTime();
             $scope.options.xaxis.min = now - 10000;
             if ($scope.dataset[0].data.length > 11) {
