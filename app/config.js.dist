@@ -5,11 +5,8 @@ var config = {
             {
                 tick: "second",           // minimum tick marker - can be second, minute, hour, month, year
                 name: "UniqueSensorName", // name of the sensor
+                type: 'livesensors',      // type of sensor: sensors, livesensors (todo: not yet implemented)
                 span: 10000               // size of visible area in milliseconds
-                tick: "second",
-                name: "UniqueSensorName",
-                type: 'livesensors',
-                span: 10000
             },
             {
                 tick: "minute",
