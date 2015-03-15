@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('LatS.view1', ['ngRoute', 'angular-flot'])
+angular.module('LatS.screen', ['ngRoute', 'angular-flot'])
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view1', {
-    templateUrl: 'view1/view1.html',
-    controller: 'View1Ctrl'
+  $routeProvider.when('/screen', {
+    templateUrl: 'screen/main.html',
+    controller: 'ScreenCtrl'
   });
 }])
 
-.controller('View1Ctrl', ['$scope', '$interval', '$http', function($scope, $interval, $http) {
+.controller('ScreenCtrl', ['$scope', '$interval', '$http', function($scope, $interval, $http) {
 
         $scope.dataset = [
             {
@@ -28,7 +28,7 @@ angular.module('LatS.view1', ['ngRoute', 'angular-flot'])
 
         var x = 0;
         $interval(function() {
-            $http.get(config.host + '/sensor/UniqueSensorName').
+            $http.get(config.host + '/sensors/UniqueSensorName').
                 success(function (data, status, headers, config) {
 
                     var values = [];

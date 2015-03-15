@@ -5,9 +5,9 @@ angular.module(
     [
         'ngRoute',
         'LatS.version',
-        'LatS.view1',
+        'LatS.screen',
         'angular-flot'
     ]
 ).config(['$routeProvider', function($routeProvider) {
-        $routeProvider.otherwise({redirectTo: '/view1'});
+        $routeProvider.otherwise({redirectTo: '/screen'});
 }]);
