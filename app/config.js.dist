@@ -5,11 +5,13 @@ var config = {
             {
                 tick: "second",
                 name: "UniqueSensorName",
+                type: 'livesensors',
                 span: 10000
             },
             {
                 tick: "minute",
                 name: "UniqueSensorName",
+                type: 'sensors',
                 span: 60 * 60 * 1000
             }
         ]
