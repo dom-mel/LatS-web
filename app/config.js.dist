@@ -3,6 +3,9 @@ var config = {
 
     charts: [
             {
+                tick: "second",           // minimum tick marker - can be second, minute, hour, month, year
+                name: "UniqueSensorName", // name of the sensor
+                span: 10000               // size of visible area in milliseconds
                 tick: "second",
                 name: "UniqueSensorName",
                 type: 'livesensors',
