@@ -1,0 +1,3 @@
+var config = {
+    'host': 'http://your.lats.host/lats'
+};

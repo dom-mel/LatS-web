@@ -13,3 +13,4 @@ tmp
 *.iml
 *.swp
 /nbproject/
+app/config.js

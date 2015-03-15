@@ -8,14 +8,11 @@ angular.module('LatS.view1', ['ngRoute', 'angular-flot'])
   });
 }])
 
-.controller('View1Ctrl', ['$scope', '$interval', function($scope, $interval) {
+.controller('View1Ctrl', ['$scope', '$interval', '$http', function($scope, $interval, $http) {
 
-        var now = (new Date()).getTime();
         $scope.dataset = [
             {
-                data: [
-                    [now, 0]
-                ]
+                data: []
             }
         ];
 
@@ -31,17 +28,17 @@ angular.module('LatS.view1', ['ngRoute', 'angular-flot'])
 
         var x = 0;
         $interval(function() {
-            x++;
-            if (x > 360) {
-                x = 0;
-            }
-            $scope.dataset[0].data.push([(new Date()).getTime(), ( Math.sin(x)) ]);
-            var now = (new Date()).getTime();
-            $scope.options.xaxis.min = now - 10000;
-            if ($scope.dataset[0].data.length > 11) {
-                $scope.dataset[0].data.splice(0, 1);
-            }
-        }, 1000);
+            $http.get(config.host + '/sensor/UniqueSensorName').
+                success(function (data, status, headers, config) {
+
+                    var values = [];
+
+                    for (var i = 0; i < data.length; i++) {
+                        values.push([data[i].date, data[i].value]);
+                    }
+                    $scope.dataset[0].data = values;
+                });
+        }, 3000);
 
     }]
 );
