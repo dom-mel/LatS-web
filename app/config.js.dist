@@ -1,3 +1,16 @@
 var config = {
-    'host': 'http://your.lats.host/lats'
+    'host': 'http://your.lats.host/lats',
+
+    charts: [
+            {
+                tick: "second",
+                name: "UniqueSensorName",
+                span: 10000
+            },
+            {
+                tick: "minute",
+                name: "UniqueSensorName",
+                span: 60 * 60 * 1000
+            }
+        ]
 };

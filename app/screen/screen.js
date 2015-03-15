@@ -3,42 +3,54 @@
 angular.module('LatS.screen', ['ngRoute', 'angular-flot'])
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/screen', {
-    templateUrl: 'screen/main.html',
+    templateUrl: 'screen/screen.html',
     controller: 'ScreenCtrl'
   });
 }])
 
-.controller('ScreenCtrl', ['$scope', '$interval', '$http', function($scope, $interval, $http) {
+    .controller('ScreenCtrl', ['$scope', '$interval', '$http', function($scope, $interval, $http) {
 
-        $scope.dataset = [
-            {
-                data: []
-            }
-        ];
+        $scope.chartConfigs = config.charts;
 
-        $scope.options = {
-            legend: {
-                show: false
-            },
-            xaxis: {
-                mode: "time",
-                minTickSize: [1, "second"]
-            }
-        };
 
-        var x = 0;
-        $interval(function() {
-            $http.get(config.host + '/sensors/UniqueSensorName').
-                success(function (data, status, headers, config) {
-
-                    var values = [];
-
-                    for (var i = 0; i < data.length; i++) {
-                        values.push([data[i].date, data[i].value]);
+        $scope.charts = [];
+        for (var i = 0; i < $scope.chartConfigs.length; i++) {
+            $scope.charts.push(
+                {
+                    dataSet: [ { data: [] } ],
+                    options: {
+                        legend: { show: false },
+                        xaxis: {
+                            mode: "time",
+                            minTickSize: [1, $scope.chartConfigs[i].tick],
+                            max: (new Date().getTime()),
+                            min: (new Date().getTime()) - $scope.chartConfigs[i].span
+                        }
                     }
-                    $scope.dataset[0].data = values;
-                });
-        }, 3000);
+                }
+            );
+        }
 
-    }]
-);
+        $interval(function () {
+            for (var j = 0; j < $scope.chartConfigs.length; j++) {
+
+                (function() {
+                    var currentIndex = j;
+                    $http.get(config.host + '/sensors/' + $scope.chartConfigs[j].name)
+                        .success(function (data, status, headers, config) {
+                            var values = [];
+
+                            for (var i = 0; i < data.length; i++) {
+                                values.push([data[i].date * 1000, data[i].value]);
+                            }
+                            $scope.charts[currentIndex].dataSet[0].data = values;
+                            $scope.charts[currentIndex].options.xaxis.max =
+                                (new Date().getTime());
+                            $scope.charts[currentIndex].options.xaxis.min =
+                                (new Date().getTime()) - $scope.chartConfigs[currentIndex].span;
+                        });
+                })();
+            }
+        }, 1000);
+
+    }]);

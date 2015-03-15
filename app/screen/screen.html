@@ -1,0 +1,25 @@
+<div class="col-sm-12">
+    <form class="form-inline">
+        <select class="form-control">
+            <option>test</option>
+        </select>
+
+        <select class="form-control">
+            <option>Hourly</option>
+            <option>Daily</option>
+            <option>Weekly</option>
+            <option>Monthly</option>
+            <option>Yearly</option>
+        </select>
+        <input type="button" class="btn" value="addGraph">
+    </form>
+</div>
+
+<div class="col-sm-6" ng-repeat="chart in charts">
+    <flot
+            dataset="chart.dataSet"
+            options="chart.options"
+            height="480px"
+            >
+    </flot>
+</div>
