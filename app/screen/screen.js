@@ -36,9 +36,14 @@ angular.module('LatS.screen', ['ngRoute', 'angular-flot'])
 
                 (function() {
                     var currentIndex = j;
-                    $http.get(config.host + '/sensors/' + $scope.chartConfigs[j].name)
-                        .success(function (data, status, headers, config) {
-                            var values = [];
+                    $http({
+                        method: 'GET',
+                        url: config.host + '/v1/sensors/' + $scope.chartConfigs[j].name,
+                        params: {
+                            from: parseInt((new Date().getTime() - $scope.chartConfigs[j].span) / 1000)
+                        }
+                    }).success(function (data) {
+                        var values = [];
 
                             for (var i = 0; i < data.length; i++) {
                                 values.push([data[i].date * 1000, data[i].value]);
