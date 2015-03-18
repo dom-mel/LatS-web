@@ -40,7 +40,7 @@ angular.module('LatS.screen', ['ngRoute', 'angular-flot'])
                         method: 'GET',
                         url: config.host + '/v1/sensors/' + $scope.chartConfigs[j].name,
                         params: {
-                            from: parseInt((new Date().getTime() - $scope.chartConfigs[j].span) / 1000)
+                            from: parseInt((new Date().getTime() - $scope.chartConfigs[j].span * 1.1) / 1000)
                         }
                     }).success(function (data) {
                         var values = [];
