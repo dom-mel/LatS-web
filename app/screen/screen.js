@@ -56,6 +56,6 @@ angular.module('LatS.screen', ['ngRoute', 'angular-flot'])
                         });
                 })();
             }
-        }, 1000);
+        }, 10000);
 
     }]);
